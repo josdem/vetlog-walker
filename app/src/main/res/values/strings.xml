@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">vetlog-walker-1</string>
+    <string name="app_name">vetlog-walker</string>
+    <string name="header">Vetlog Walker</string>
 </resources>
