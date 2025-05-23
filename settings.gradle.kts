@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "vetlog-walker-1"
+rootProject.name = "vetlog-walker"
 include(":app")
