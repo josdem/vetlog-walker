@@ -47,13 +47,16 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.finish.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }
-
         binding.message.text = ApplicationState.getValue("petId").toString()
         val tracker = this.context?.let { LocationTracker(it) }
         tracker?.let { lifecycle.addObserver(it) }
+
+        binding.finish.setOnClickListener {
+            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            tracker?.let { lifecycle.removeObserver(it) }
+            tracker?.onDestroy(this)
+        }
+
     }
 
     override fun onDestroyView() {
