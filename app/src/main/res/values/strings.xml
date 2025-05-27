@@ -3,9 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="first_fragment_label">Vetlog Walker</string>
     <string name="second_fragment_label">Vetlog Walker</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="finish">Finish</string>
     <string name="pet_id_hint" translatable="false">PetID</string>
     <string name="send_button">Send</string>
-    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
 </resources>
