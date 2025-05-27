@@ -15,7 +15,7 @@
   under the License.
 */
 
-package com.josdem.vetlog
+package com.josdem.vetlog.tracker
 
 import android.Manifest
 import android.content.Context
