@@ -18,13 +18,4 @@ cd ${androidSdk}/emulator
 
 Where:
 - `${androidSdk}` is your Android SDK directory
-- `${deviceName}` is device you created 
-
-### To install the app
-```bash
-${androidSdk}/platform-tools/adb -s ${deviceName} install ${projectHome}/app/build/outputs/apk/debug/app-debug.apk
-```
-
-Where:
-- `${androidSdk}` is your Android SDK directory
-- `${projectHome}` is your project directory
+- `${deviceName}` is device you created
