@@ -52,6 +52,8 @@ class SecondFragment : Fragment() {
         }
 
         binding.message.text = ApplicationState.getValue("petId").toString()
+        val tracker = this.context?.let { LocationTracker(it) }
+        tracker?.let { lifecycle.addObserver(it) }
     }
 
     override fun onDestroyView() {
