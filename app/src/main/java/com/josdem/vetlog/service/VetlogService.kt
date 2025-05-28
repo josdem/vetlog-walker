@@ -25,7 +25,7 @@ import retrofit2.http.GET
 interface VetlogService {
 
     @GET("/geolocation/location")
-    suspend fun getCategories(
+    suspend fun sendLocation(
         @Body petGeolocation: PetGeolocation,
     ): Response<String>
 }
