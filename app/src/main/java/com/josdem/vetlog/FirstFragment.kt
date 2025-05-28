@@ -47,8 +47,8 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.send.setOnClickListener {
-            val petId = binding.petId.text
-            ApplicationState.storeValue("petId", petId)
+            val petId = binding.petId.text.toString()
+            ApplicationState.storeValue("petId", Integer.valueOf(petId))
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }

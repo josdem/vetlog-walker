@@ -18,7 +18,7 @@
 package com.josdem.vetlog.model
 
 data class PetGeolocation(
-    val id: Long,
+    val id: Int,
     val latitude: Double,
     val longitude: Double
 )
