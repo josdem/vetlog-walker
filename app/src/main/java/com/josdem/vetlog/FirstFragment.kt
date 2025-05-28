@@ -48,7 +48,7 @@ class FirstFragment : Fragment() {
 
         binding.send.setOnClickListener {
             val petId = binding.petId.text.toString()
-            ApplicationState.storeValue("petId", Integer.valueOf(petId))
+            ApplicationState.storeValue("petId", petId.toLong())
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }

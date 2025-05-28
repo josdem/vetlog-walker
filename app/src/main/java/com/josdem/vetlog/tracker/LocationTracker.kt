@@ -26,7 +26,6 @@ import android.util.Log
 import androidx.annotation.RequiresPermission
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
-import com.josdem.vetlog.model.PetGeolocation
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
 import com.josdem.vetlog.state.ApplicationState
@@ -54,10 +53,9 @@ class LocationTracker(private val context: Context) : LocationListener, DefaultL
         val latitude = location.latitude
         val longitude = location.longitude
         Log.d("geolocation: ", "$latitude , $longitude")
-        val petId = ApplicationState.getValue("petId") as Int
-        val request = PetGeolocation(petId, latitude, longitude)
+        val petId = ApplicationState.getValue("petId") as Long
         MainScope().launch {
-            val result = vetlogService.sendLocation(request)
+            val result = vetlogService.sendLocation(petId, latitude, longitude)
             Log.d("response: ", result.body().toString())
         }
     }

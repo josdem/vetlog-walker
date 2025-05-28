@@ -17,15 +17,16 @@
 
 package com.josdem.vetlog.service
 
-import com.josdem.vetlog.model.PetGeolocation
 import retrofit2.Response
-import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface VetlogService {
 
-    @POST("/geolocation/location")
+    @POST("/geolocation/location/{petId}/{latitude}/{longitude}")
     suspend fun sendLocation(
-        @Body petGeolocation: PetGeolocation,
+        @Path("petId") petId: Long,
+        @Path("latitude") latitude: Double,
+        @Path("longitude") longitude: Double,
     ): Response<String>
 }
