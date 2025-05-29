@@ -32,9 +32,10 @@ import com.josdem.vetlog.state.ApplicationState
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-
-class LocationTracker(private val context: Context) : LocationListener, DefaultLifecycleObserver {
-
+class LocationTracker(
+    private val context: Context,
+) : LocationListener,
+    DefaultLifecycleObserver {
     private lateinit var locationManager: LocationManager
     private lateinit var vetlogService: VetlogService
 

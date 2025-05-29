@@ -27,7 +27,5 @@ object ApplicationState {
         memory[key] = value
     }
 
-    fun getValue(key: String): Any? {
-        return memory[key]
-    }
+    fun getValue(key: String): Any? = memory[key]
 }
