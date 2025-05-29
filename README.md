@@ -24,3 +24,8 @@ Where:
 ```bash
 ./gradlew spotlessApply
 ```
+
+### To build the project
+```bash
+./gradlew assembleDebug
+```
