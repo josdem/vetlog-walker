@@ -13,9 +13,14 @@ This project send pet's geolocation to Vetlog
 ### To run emulator
 ```bash
 cd ${androidSdk}/emulator 
-./emulator @${deviceName} 
+./emulator @deviceName 
 ```
 
 Where:
 - `${androidSdk}` is your Android SDK directory
-- `${deviceName}` is device you created
+- `deviceName` is device you created
+
+### To format the code
+```bash
+./gradlew spotlessApply
+```
