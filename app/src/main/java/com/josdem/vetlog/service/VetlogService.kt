@@ -26,4 +26,7 @@ interface VetlogService {
     suspend fun storePets(
         @Path("petIds") petIds: String
     ): Response<String>
+
+    @GET("/geolocation/{latitude:.+}/{longitude:.+}")
+    suspend fun sendLocation(@Path("latitude") latitude: Double, @Path("longitude") longitude: Double): Response<String>
 }

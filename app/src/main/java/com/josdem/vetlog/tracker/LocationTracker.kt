@@ -54,9 +54,8 @@ class LocationTracker(
         val latitude = location.latitude
         val longitude = location.longitude
         Log.d("geolocation: ", "$latitude , $longitude")
-        val petIds = ApplicationState.getValue("petIds") as String
         MainScope().launch {
-            val result = vetlogService.storePets(petIds)
+            val result = vetlogService.sendLocation(latitude, longitude)
             Log.d("response: ", result.body().toString())
         }
     }

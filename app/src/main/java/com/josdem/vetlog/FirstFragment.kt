@@ -18,16 +18,21 @@
 package com.josdem.vetlog
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.josdem.vetlog.databinding.FragmentFirstBinding
+import com.josdem.vetlog.service.VetlogService
 import com.josdem.vetlog.state.ApplicationState
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 class FirstFragment : Fragment() {
     private var _binding: FragmentFirstBinding? = null
+    private lateinit var vetlogService: VetlogService
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -49,8 +54,11 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.send.setOnClickListener {
-            val petIds = binding.petId.text.toString()
-            ApplicationState.storeValue("petIds", petIds)
+            val petIds = binding.petIds.text.toString()
+            MainScope().launch {
+                val result = vetlogService.storePets(petIds)
+                Log.d("response: ", result.body().toString())
+            }
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }
