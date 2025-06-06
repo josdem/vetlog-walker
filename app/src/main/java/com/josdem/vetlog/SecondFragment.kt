@@ -49,7 +49,6 @@ class SecondFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.message.text = ApplicationState.getValue("petId").toString()
         val tracker = this.context?.let { LocationTracker(it) }
         tracker?.let { lifecycle.addObserver(it) }
 

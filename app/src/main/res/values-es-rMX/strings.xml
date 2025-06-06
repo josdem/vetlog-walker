@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">vetlog-walker</string>
+    <string name="pet_id_hint">Pets ID separados por coma</string>
     <string name="send_button">Enviar</string>
     <string name="second_fragment_label">Segundo Fragmento</string>
     <string name="next">Adelante</string>
@@ -8,4 +9,5 @@
     <string name="action_settings">Configuración</string>
     <string name="first_fragment_label">Primer Fragmento</string>
     <string name="finish">Terminar</string>
+    <string name="status">Enviando Coordenadas</string>
 </resources>
