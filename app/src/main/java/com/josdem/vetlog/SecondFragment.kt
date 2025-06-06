@@ -24,7 +24,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.josdem.vetlog.databinding.FragmentSecondBinding
-import com.josdem.vetlog.state.ApplicationState
 import com.josdem.vetlog.tracker.LocationTracker
 
 class SecondFragment : Fragment() {
