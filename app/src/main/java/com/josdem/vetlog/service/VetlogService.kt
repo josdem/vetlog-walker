@@ -22,11 +22,11 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface VetlogService {
-    @GET("/geolocation/store/{petIds}/")
+    @GET("/geolocation/store/{petIds}")
     suspend fun storePets(
         @Path("petIds") petIds: String
     ): Response<String>
 
-    @GET("/geolocation/{latitude:.+}/{longitude:.+}")
+    @GET("/geolocation/location/{latitude}/{longitude}")
     suspend fun sendLocation(@Path("latitude") latitude: Double, @Path("longitude") longitude: Double): Response<String>
 }

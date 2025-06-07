@@ -4,6 +4,7 @@
     <string name="first_fragment_label">Vetlog Walker</string>
     <string name="second_fragment_label">Vetlog Walker</string>
     <string name="finish">Finish</string>
+    <string name="walking_complete">Complete walking</string>
     <string name="status">Sending Location</string>
     <string name="pet_id_hint">PetIDs comma-delimited</string>
     <string name="send_button">Send</string>

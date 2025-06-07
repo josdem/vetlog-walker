@@ -9,5 +9,6 @@
     <string name="action_settings">Configuración</string>
     <string name="first_fragment_label">Primer Fragmento</string>
     <string name="finish">Terminar</string>
+    <string name="walking_complete">Finalizar caminata</string>
     <string name="status">Enviando Coordenadas</string>
 </resources>

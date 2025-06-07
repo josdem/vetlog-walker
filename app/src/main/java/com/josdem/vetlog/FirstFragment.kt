@@ -25,6 +25,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.josdem.vetlog.databinding.FragmentFirstBinding
+import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -42,6 +43,7 @@ class FirstFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        vetlogService = RetrofitHelper.getInstance().create(VetlogService::class.java)
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
     }
