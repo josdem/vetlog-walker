@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.converter.scalars)
     implementation(libs.converter.gson)
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

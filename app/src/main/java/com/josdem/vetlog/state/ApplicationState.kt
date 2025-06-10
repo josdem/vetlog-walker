@@ -15,21 +15,17 @@
   under the License.
 */
 
-package com.josdem.vetlog.service
+package com.josdem.vetlog.state
 
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
+object ApplicationState {
+    private val memory = HashMap<String, Any>()
 
-interface VetlogService {
-    @GET("/geolocation/store/{petIds}")
-    suspend fun storePets(
-        @Path("petIds") petIds: String,
-    ): Response<String>
+    fun storeValue(
+        key: String,
+        value: Any,
+    ) {
+        memory[key] = value
+    }
 
-    @GET("/geolocation/location/{latitude}/{longitude}")
-    suspend fun sendLocation(
-        @Path("latitude") latitude: Double,
-        @Path("longitude") longitude: Double,
-    ): Response<String>
+    fun getValue(key: String): Any? = memory[key]
 }
