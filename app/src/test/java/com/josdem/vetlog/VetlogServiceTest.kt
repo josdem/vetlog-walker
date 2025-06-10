@@ -19,25 +19,36 @@ package com.josdem.vetlog
 
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
-import org.junit.Test
-import retrofit2.Response
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.FixMethodOrder
+import org.junit.Test
+import org.junit.runners.MethodSorters
+import retrofit2.Response
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class VetlogServiceTest {
-
     private val vetlogService: VetlogService =
         RetrofitHelper.getInstance().create(VetlogService::class.java)
 
-    private suspend fun storePets(): Response<String> {
-        return vetlogService.storePets("338")
-    }
+    private suspend fun storePets(): Response<String> = vetlogService.storePets("338")
+
+    private suspend fun sendLocation(): Response<String> = vetlogService.sendLocation(37.7749, -122.4194)
 
     @Test
-    fun `should store a pet for geolocation`() =
+    fun `a should store a pet for geolocation`() =
         runTest {
             val response = storePets()
+            val body: String? = response.body()
+            assertTrue(response.isSuccessful)
+            assertEquals("OK", body)
+        }
+
+    @Test
+    fun `b should send pet geolocation`() =
+        runTest {
+            val response = sendLocation()
             val body: String? = response.body()
             assertTrue(response.isSuccessful)
             assertEquals("OK", body)
