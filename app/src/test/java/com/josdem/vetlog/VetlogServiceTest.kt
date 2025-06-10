@@ -33,7 +33,6 @@ class VetlogServiceTest {
         RetrofitHelper.getInstance().create(VetlogService::class.java)
 
     private suspend fun storePets(): Response<String> = vetlogService.storePets("338")
-
     private suspend fun sendLocation(): Response<String> = vetlogService.sendLocation(37.7749, -122.4194)
 
     @Test
