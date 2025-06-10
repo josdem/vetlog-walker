@@ -27,7 +27,6 @@ import androidx.navigation.fragment.findNavController
 import com.josdem.vetlog.databinding.FragmentFirstBinding
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
-import com.josdem.vetlog.state.ApplicationState
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -63,8 +62,6 @@ class FirstFragment : Fragment() {
             }
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
-
-        ApplicationState.storeValue("firstFragment", this)
     }
 
     override fun onDestroyView() {

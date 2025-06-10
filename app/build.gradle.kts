@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.converter.gson)
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
+    implementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
