@@ -25,7 +25,6 @@ import org.junit.Assert.assertTrue
 import org.junit.FixMethodOrder
 import org.junit.Test
 import org.junit.runners.MethodSorters
-import retrofit2.Response
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class VetlogServiceTest {
