@@ -25,6 +25,11 @@ Where:
 ./gradlew spotlessApply
 ```
 
+### To run tests
+```bash
+./gradlew test
+```
+
 ### To build the project
 ```bash
 ./gradlew assembleDebug
