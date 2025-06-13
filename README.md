@@ -1,5 +1,6 @@
 Vetlog Walker
 ----------------------------
+[![GitHub](https://github.com/josdem/vetlog-walker/actions/workflows/build.yml/badge.svg)](https://github.com/josdem/vetlog-walker/actions)
 
 This project send pet's geolocation to Vetlog
 
