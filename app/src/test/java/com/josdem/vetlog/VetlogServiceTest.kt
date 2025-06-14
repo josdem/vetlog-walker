@@ -48,4 +48,13 @@ class VetlogServiceTest {
             assertTrue(response.isSuccessful)
             assertEquals("OK", body)
         }
+
+    @Test
+    fun `a should send a pulling up request`() =
+        runTest {
+            val response = vetlogService.pullingUp("338")
+            val body: String? = response.body()
+            assertTrue(response.isSuccessful)
+            assertEquals("OK", body)
+        }
 }

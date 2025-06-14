@@ -32,4 +32,9 @@ interface VetlogService {
         @Path("latitude") latitude: Double,
         @Path("longitude") longitude: Double,
     ): Response<String>
+
+    @GET("/geolocation/pullup/{petId}")
+    suspend fun pullingUp(
+        @Path("petId") petId: String,
+    ): Response<String>
 }
