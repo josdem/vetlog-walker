@@ -17,14 +17,18 @@
 
 package com.josdem.vetlog
 
+import com.josdem.vetlog.LocationTrackerTest.BlockCoroutineDispatcher
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.FixMethodOrder
 import org.junit.Test
 import org.junit.runners.MethodSorters
+import kotlin.coroutines.CoroutineContext
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class VetlogServiceTest {
@@ -32,20 +36,37 @@ class VetlogServiceTest {
         RetrofitHelper.getInstance().create(VetlogService::class.java)
 
     @Test
-    fun `a should store a pet for geolocation`() =
-        runTest {
+    fun `a should store a pet for geolocation`() {
+        blockCoroutineScope.launch {
             val response = vetlogService.storePets("338")
             val body: String? = response.body()
             assertTrue(response.isSuccessful)
             assertEquals("OK", body)
         }
+    }
 
     @Test
-    fun `b should send pet geolocation`() =
-        runTest {
+    fun `b should send pet geolocation`() {
+        blockCoroutineScope.launch {
             val response = vetlogService.sendLocation(37.7749, -122.4194)
             val body: String? = response.body()
             assertTrue(response.isSuccessful)
             assertEquals("OK", body)
         }
+    }
+
+    class BlockCoroutineDispatcher : CoroutineDispatcher() {
+        override fun dispatch(
+            context: CoroutineContext,
+            block: Runnable,
+        ) {
+            block.run()
+        }
+    }
+
+    private val blockCoroutineScope =
+        CoroutineScope(
+            com.josdem.vetlog.LocationTrackerTest
+                .BlockCoroutineDispatcher(),
+        )
 }

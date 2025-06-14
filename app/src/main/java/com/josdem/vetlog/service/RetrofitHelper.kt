@@ -23,11 +23,20 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object RetrofitHelper {
     private const val BASE_URL = "https://vetlog.org/"
+    private const val GMAILER_BASE_URL = "https://gmailer.josdem.io/"
 
     fun getInstance(): Retrofit =
         Retrofit
             .Builder()
             .baseUrl(BASE_URL)
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+    fun getGmailerInstance(): Retrofit =
+        Retrofit
+            .Builder()
+            .baseUrl(GMAILER_BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
