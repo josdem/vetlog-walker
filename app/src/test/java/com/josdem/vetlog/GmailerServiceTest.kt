@@ -48,7 +48,7 @@ class GmailerServiceTest {
             "contact@josdem.io",
             token,
             "Hello from Vetlog Walker!",
-            "This is a test email",
+            "Sora",
             "pullingUp.ftl",
         )
 }
