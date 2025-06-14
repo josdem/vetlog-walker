@@ -23,6 +23,7 @@ import com.josdem.vetlog.service.RetrofitHelper
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Assume.assumeNotNull
 import org.junit.Test
 
 class GmailerServiceTest {
@@ -32,17 +33,20 @@ class GmailerServiceTest {
     @Test
     fun `should send a pulling up email`() =
         runTest {
-            val response = emailerService.sendMessage(getMessageCommand())
+            val token = System.getenv("TOKEN")
+            assumeNotNull(token)
+            val messageCommand = getMessageCommand(token!!)
+            val response = emailerService.sendMessage(messageCommand)
             val body: String? = response.body()
             assertTrue(response.isSuccessful)
             assertEquals("OK", body)
         }
 
-    private fun getMessageCommand(): MessageCommand =
+    private fun getMessageCommand(token: String): MessageCommand =
         MessageCommand(
             "josdem",
             "contact@josdem.io",
-            "token",
+            token,
             "Hello from Vetlog Walker!",
             "This is a test email",
             "pullingUp.ftl",
