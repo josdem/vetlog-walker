@@ -24,6 +24,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.josdem.vetlog.databinding.FragmentFirstBinding
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
@@ -45,6 +46,15 @@ class FirstFragment : Fragment() {
     ): View {
         vetlogService = RetrofitHelper.getInstance().create(VetlogService::class.java)
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
+
+        binding.fab.setOnClickListener { view ->
+            Snackbar
+                .make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null)
+                .setAnchorView(R.id.fab)
+                .show()
+        }
+
         return binding.root
     }
 
