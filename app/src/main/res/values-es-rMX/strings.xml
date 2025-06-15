@@ -11,4 +11,5 @@
     <string name="finish">Terminar</string>
     <string name="walking_complete">Finalizar caminata</string>
     <string name="status">Enviando Coordenadas</string>
+    <string name="pulling_up">Llegando a casa mensaje</string>
 </resources>

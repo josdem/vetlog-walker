@@ -23,6 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.josdem.vetlog.databinding.FragmentSecondBinding
 import com.josdem.vetlog.tracker.LocationTracker
 
@@ -39,6 +40,15 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
+
+        binding.fab.setOnClickListener { view ->
+            Snackbar
+                .make(view, "Ready to send pulling up messages", Snackbar.LENGTH_LONG)
+                .setAction("Action", null)
+                .setAnchorView(R.id.fab)
+                .show()
+        }
+
         return binding.root
     }
 
