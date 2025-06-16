@@ -8,4 +8,5 @@
     <string name="status">Sending Location</string>
     <string name="pet_id_hint">PetIDs comma-delimited</string>
     <string name="send_button">Send</string>
+    <string name="pulling_up">Send pulling up message</string>
 </resources>
