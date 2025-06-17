@@ -20,6 +20,7 @@ package com.josdem.vetlog.helper
 import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
+import com.josdem.vetlog.R
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
 import com.josdem.vetlog.state.ApplicationState
@@ -28,17 +29,17 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
 class DialogHelper(
-    private val context: Context,
+    context: Context,
 ) {
     private val builder: AlertDialog.Builder = AlertDialog.Builder(context)
     private var vetlogService = RetrofitHelper.getInstance().create(VetlogService::class.java)
-    val checkedItems = BooleanArray(ApplicationState.getValue(PET_IDS)!!.size)
-    val selectedItems = ApplicationState.getValue(PET_IDS)!!.toMutableList()
+    private val checkedItems = BooleanArray(ApplicationState.getValue(PET_IDS)!!.size)
+    private val selectedItems = ApplicationState.getValue(PET_IDS)!!.toMutableList()
 
     init {
         builder
-            .setTitle("Send pulling up message")
-            .setPositiveButton("Send") { dialog, which ->
+            .setTitle(R.string.pulling_up)
+            .setPositiveButton(R.string.send_button) { _, _ ->
                 MainScope().launch {
                     for (i in checkedItems.indices) {
                         if (checkedItems[i]) {
@@ -48,12 +49,12 @@ class DialogHelper(
                         }
                     }
                 }
-            }.setNegativeButton("Close") { dialog, which ->
+            }.setNegativeButton(R.string.close_button) { dialog, _ ->
                 dialog.dismiss()
             }.setMultiChoiceItems(
                 (ApplicationState.getValue(PET_IDS) ?: emptyList()).toTypedArray(),
                 checkedItems,
-            ) { dialog, which, isChecked ->
+            ) { _, which, isChecked ->
                 checkedItems[which] = isChecked
             }
     }
