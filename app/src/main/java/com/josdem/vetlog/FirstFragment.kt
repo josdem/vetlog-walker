@@ -27,6 +27,8 @@ import androidx.navigation.fragment.findNavController
 import com.josdem.vetlog.databinding.FragmentFirstBinding
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
+import com.josdem.vetlog.state.ApplicationState
+import com.josdem.vetlog.state.PET_IDS
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -56,6 +58,8 @@ class FirstFragment : Fragment() {
 
         binding.send.setOnClickListener {
             val petIds = binding.petIds.text.toString()
+            val pets = petIds.split(",").map { it.trim() }
+            ApplicationState.storeValue(PET_IDS, pets)
             MainScope().launch {
                 val result = vetlogService.storePets(petIds)
                 Log.d("response: ", result.body().toString())
