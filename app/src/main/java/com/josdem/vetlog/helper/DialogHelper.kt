@@ -49,7 +49,7 @@ class DialogHelper(
                     }
                 }
             }.setNegativeButton("Close") { dialog, which ->
-                // Do something else.
+                dialog.dismiss()
             }.setMultiChoiceItems(
                 (ApplicationState.getValue("petIds") ?: emptyList()).toTypedArray(),
                 checkedItems,
