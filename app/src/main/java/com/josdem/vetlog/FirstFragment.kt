@@ -57,7 +57,7 @@ class FirstFragment : Fragment() {
 
         binding.send.setOnClickListener {
             val petIds = binding.petIds.text.toString()
-            val pets = petIds.split(",")
+            val pets = petIds.split(",").map { it.trim() }
             ApplicationState.storeValue("petIds", pets)
             MainScope().launch {
                 val result = vetlogService.storePets(petIds)

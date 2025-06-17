@@ -36,7 +36,7 @@ class DialogHelper(
         builder
             .setTitle("Send pulling up message")
             .setPositiveButton("Send") { dialog, which ->
-                coroutineScope.launch {
+                MainScope().launch {
                     ApplicationState.getValue("petIds")?.forEach {
                         val result = vetlogService.pullingUp(it)
                         Log.d("response: ", result.body().toString())
