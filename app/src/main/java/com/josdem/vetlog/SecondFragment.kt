@@ -17,7 +17,6 @@
 
 package com.josdem.vetlog
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +24,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.josdem.vetlog.databinding.FragmentSecondBinding
-import com.josdem.vetlog.state.ApplicationState
+import com.josdem.vetlog.helper.DialogHelper
 import com.josdem.vetlog.tracker.LocationTracker
 
 class SecondFragment : Fragment() {
@@ -42,23 +41,9 @@ class SecondFragment : Fragment() {
     ): View {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
 
-        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-        builder
-            .setTitle("Send pulling up message")
-            .setPositiveButton("Send") { dialog, which ->
-                // Do something.
-            }.setNegativeButton("Close") { dialog, which ->
-                // Do something else.
-            }.setMultiChoiceItems(
-                ApplicationState.getValue("petIds")!!.toTypedArray(),
-                null,
-            ) { dialog, which, isChecked ->
-                // Do something.
-            }
-
+        val dialogHelper = context?.let { DialogHelper(it) }
         binding.fab.setOnClickListener {
-            val dialog: AlertDialog = builder.create()
-            dialog.show()
+            dialogHelper?.showDialog()
         }
 
         return binding.root
