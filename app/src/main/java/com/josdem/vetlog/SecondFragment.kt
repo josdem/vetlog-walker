@@ -50,7 +50,7 @@ class SecondFragment : Fragment() {
             }.setNegativeButton("Close") { dialog, which ->
                 // Do something else.
             }.setSingleChoiceItems(
-                arrayOf(ApplicationState.getValue("petIds") as String),
+                ApplicationState.getValue("petIds")!!.toTypedArray(),
                 0,
             ) { dialog, which ->
                 // Do something.

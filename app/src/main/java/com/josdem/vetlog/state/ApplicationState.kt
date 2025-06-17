@@ -18,14 +18,14 @@
 package com.josdem.vetlog.state
 
 object ApplicationState {
-    private val memory = HashMap<String, Any>()
+    private val memory = HashMap<String, List<String>>()
 
     fun storeValue(
         key: String,
-        value: Any,
+        value: List<String>,
     ) {
         memory[key] = value
     }
 
-    fun getValue(key: String): Any? = memory[key]
+    fun getValue(key: String): List<String>? = memory[key]
 }
