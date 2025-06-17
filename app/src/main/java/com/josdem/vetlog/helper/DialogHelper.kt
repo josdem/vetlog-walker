@@ -45,7 +45,7 @@ class DialogHelper(
             }.setNegativeButton("Close") { dialog, which ->
                 // Do something else.
             }.setMultiChoiceItems(
-                ApplicationState.getValue("petIds")!!.toTypedArray(),
+                (ApplicationState.getValue("petIds") ?: emptyList()).toTypedArray(),
                 null,
             ) { dialog, which, isChecked ->
                 // Do something.

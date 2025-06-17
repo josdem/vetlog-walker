@@ -17,8 +17,10 @@
 
 package com.josdem.vetlog.state
 
+import java.util.concurrent.ConcurrentHashMap
+
 object ApplicationState {
-    private val memory = HashMap<String, List<String>>()
+    private val memory = ConcurrentHashMap<String, List<String>>()
 
     fun storeValue(
         key: String,
