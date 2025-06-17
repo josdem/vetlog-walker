@@ -19,6 +19,8 @@ package com.josdem.vetlog.state
 
 import java.util.concurrent.ConcurrentHashMap
 
+const val PET_IDS = "petIds"
+
 object ApplicationState {
     private val memory = ConcurrentHashMap<String, List<String>>()
 

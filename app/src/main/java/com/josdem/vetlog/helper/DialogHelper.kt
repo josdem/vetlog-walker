@@ -23,6 +23,7 @@ import android.util.Log
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
 import com.josdem.vetlog.state.ApplicationState
+import com.josdem.vetlog.state.PET_IDS
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -37,7 +38,7 @@ class DialogHelper(
             .setTitle("Send pulling up message")
             .setPositiveButton("Send") { dialog, which ->
                 MainScope().launch {
-                    ApplicationState.getValue("petIds")?.forEach {
+                    ApplicationState.getValue(PET_IDS)?.forEach {
                         val result = vetlogService.pullingUp(it)
                         Log.d("response: ", result.body().toString())
                     }
