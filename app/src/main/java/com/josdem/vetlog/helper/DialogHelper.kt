@@ -32,24 +32,29 @@ class DialogHelper(
 ) {
     private val builder: AlertDialog.Builder = AlertDialog.Builder(context)
     private var vetlogService = RetrofitHelper.getInstance().create(VetlogService::class.java)
+    val checkedItems = BooleanArray(ApplicationState.getValue(PET_IDS)!!.size)
+    val selectedItems = ApplicationState.getValue(PET_IDS)!!.toMutableList()
 
     init {
         builder
             .setTitle("Send pulling up message")
             .setPositiveButton("Send") { dialog, which ->
                 MainScope().launch {
-                    ApplicationState.getValue(PET_IDS)?.forEach {
-                        val result = vetlogService.pullingUp(it)
-                        Log.d("response: ", result.body().toString())
+                    for (i in checkedItems.indices) {
+                        if (checkedItems[i]) {
+                            Log.d("Item: ", selectedItems[i])
+                            val result = vetlogService.pullingUp(selectedItems[i])
+                            Log.d("response: ", result.body().toString())
+                        }
                     }
                 }
             }.setNegativeButton("Close") { dialog, which ->
-                // Do something else.
+                dialog.dismiss()
             }.setMultiChoiceItems(
-                (ApplicationState.getValue("petIds") ?: emptyList()).toTypedArray(),
-                null,
+                (ApplicationState.getValue(PET_IDS) ?: emptyList()).toTypedArray(),
+                checkedItems,
             ) { dialog, which, isChecked ->
-                // Do something.
+                checkedItems[which] = isChecked
             }
     }
 
