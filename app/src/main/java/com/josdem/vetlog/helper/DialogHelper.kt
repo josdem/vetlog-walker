@@ -24,6 +24,8 @@ import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
 import com.josdem.vetlog.state.ApplicationState
 import com.josdem.vetlog.state.PET_IDS
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 class DialogHelper(
     private val context: Context,
@@ -40,6 +42,10 @@ class DialogHelper(
                 for (i in checkedItems.indices) {
                     if (checkedItems[i]) {
                         Log.d("Item: ", selectedItems[i])
+                        MainScope().launch {
+                            val result = vetlogService.pullingUp(selectedItems[i])
+                            Log.d("response: ", result.body().toString())
+                        }
                     }
                 }
             }.setNegativeButton("Close") { dialog, which ->
