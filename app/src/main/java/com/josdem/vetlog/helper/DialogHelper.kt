@@ -39,10 +39,10 @@ class DialogHelper(
         builder
             .setTitle("Send pulling up message")
             .setPositiveButton("Send") { dialog, which ->
-                for (i in checkedItems.indices) {
-                    if (checkedItems[i]) {
-                        Log.d("Item: ", selectedItems[i])
-                        MainScope().launch {
+                MainScope().launch {
+                    for (i in checkedItems.indices) {
+                        if (checkedItems[i]) {
+                            Log.d("Item: ", selectedItems[i])
                             val result = vetlogService.pullingUp(selectedItems[i])
                             Log.d("response: ", result.body().toString())
                         }
@@ -51,7 +51,7 @@ class DialogHelper(
             }.setNegativeButton("Close") { dialog, which ->
                 dialog.dismiss()
             }.setMultiChoiceItems(
-                (ApplicationState.getValue("petIds") ?: emptyList()).toTypedArray(),
+                (ApplicationState.getValue(PET_IDS) ?: emptyList()).toTypedArray(),
                 checkedItems,
             ) { dialog, which, isChecked ->
                 checkedItems[which] = isChecked
