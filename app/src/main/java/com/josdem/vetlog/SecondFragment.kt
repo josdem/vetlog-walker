@@ -49,10 +49,10 @@ class SecondFragment : Fragment() {
                 // Do something.
             }.setNegativeButton("Close") { dialog, which ->
                 // Do something else.
-            }.setSingleChoiceItems(
+            }.setMultiChoiceItems(
                 ApplicationState.getValue("petIds")!!.toTypedArray(),
-                0,
-            ) { dialog, which ->
+                null,
+            ) { dialog, which, isChecked ->
                 // Do something.
             }
 
