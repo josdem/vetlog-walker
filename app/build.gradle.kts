@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.diffplug.spotless") version "7.0.3"
+    id("com.diffplug.spotless") version "7.0.4"
 }
 
 android {
@@ -12,8 +12,8 @@ android {
         applicationId = "com.josdem.vetlog"
         minSdk = 23
         targetSdk = 35
-        versionCode = 9
-        versionName = "1.0.9"
+        versionCode = 10
+        versionName = "1.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
