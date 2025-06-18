@@ -19,24 +19,27 @@ package com.josdem.vetlog.helper
 
 import android.Manifest
 import android.content.Context
-import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.annotation.RequiresPermission
+import com.josdem.vetlog.util.ContextUtils
 
-class ConnectivityHelper {
+class ConnectivityHelper(
+    val context: Context,
+) {
+    private var contextUtils: ContextUtils = ContextUtils(context)
+
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    fun isMobileConnected(context: Context): Boolean {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    fun isMobileConnected(): Boolean {
+        val connectivityManager = contextUtils.getSystemService()
         val capabilities =
             connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
         if (capabilities != null) {
             if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                Log.d("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
                 return true
             } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                Log.d("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
                 return false
             }
         }
