@@ -4,6 +4,7 @@
     <string name="pet_id_hint">Pets ID separados por coma</string>
     <string name="send_button">Enviar</string>
     <string name="second_fragment_label">Segundo Fragmento</string>
+    <string name="network_message">Por favor, usa internet con la red mobil</string>
     <string name="next">Adelante</string>
     <string name="previous">Atras</string>
     <string name="action_settings">Configuración</string>

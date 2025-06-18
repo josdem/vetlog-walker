@@ -22,8 +22,10 @@ import android.location.Location
 import android.location.LocationManager
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
+import com.josdem.vetlog.helper.ConnectivityHelper
 import com.josdem.vetlog.service.VetlogService
 import com.josdem.vetlog.tracker.LocationTracker
+import com.josdem.vetlog.util.ContextUtils
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
@@ -54,12 +56,17 @@ internal class LocationTrackerTest {
     @MockK
     private lateinit var location: Location
 
+    private lateinit var contextUtils: ContextUtils
+    private lateinit var connectivityHelper: ConnectivityHelper
+
     @InjectMockKs
     private lateinit var locationTracker: LocationTracker
 
     @Before
     fun setup() {
         MockKAnnotations.init(this)
+        contextUtils = ContextUtils(context)
+        connectivityHelper = ConnectivityHelper(contextUtils)
         locationTracker = LocationTracker(context)
         every { context.getSystemService(Context.LOCATION_SERVICE) } returns locationManager
     }
@@ -82,6 +89,7 @@ internal class LocationTrackerTest {
         mockkStatic(Log::class)
         every { Log.d(any(), any()) } returns 0
 
+        every { connectivityHelper.isMobileConnected() } returns true
         every { location.latitude } returns 37.7749
         every { location.longitude } returns -122.4194
 

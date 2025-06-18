@@ -10,6 +10,7 @@
     <string name="send_button">Send</string>
     <string name="close_button">Close</string>
     <string name="pulling_up">Send pulling up message</string>
+    <string name="network_message">Please, connect to internet using mobile network</string>
     <string name="next">next</string>
     <string name="previous">previous</string>
 </resources>

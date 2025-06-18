@@ -23,11 +23,15 @@ import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.RequiresPermission
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.josdem.vetlog.R
+import com.josdem.vetlog.helper.ConnectivityHelper
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
+import com.josdem.vetlog.util.ContextUtils
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
@@ -37,12 +41,16 @@ class LocationTracker(
     DefaultLifecycleObserver {
     private lateinit var locationManager: LocationManager
     private lateinit var vetlogService: VetlogService
+    private lateinit var contextUtils: ContextUtils
+    private lateinit var connectivityHelper: ConnectivityHelper
 
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     override fun onCreate(owner: LifecycleOwner) {
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0f, this)
         vetlogService = RetrofitHelper.getInstance().create(VetlogService::class.java)
+        contextUtils = ContextUtils(context)
+        connectivityHelper = ConnectivityHelper(contextUtils)
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
@@ -53,6 +61,10 @@ class LocationTracker(
         val latitude = location.latitude
         val longitude = location.longitude
         Log.d("geolocation: ", "$latitude , $longitude")
+        if (!connectivityHelper.isMobileConnected()) {
+            Toast.makeText(context, R.string.network_message, Toast.LENGTH_SHORT).show()
+            return
+        }
         MainScope().launch {
             val result = vetlogService.sendLocation(latitude, longitude)
             Log.d("response: ", result.body().toString())
