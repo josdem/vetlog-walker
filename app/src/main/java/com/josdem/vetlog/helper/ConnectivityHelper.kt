@@ -18,16 +18,13 @@
 package com.josdem.vetlog.helper
 
 import android.Manifest
-import android.content.Context
 import android.net.NetworkCapabilities
 import androidx.annotation.RequiresPermission
 import com.josdem.vetlog.util.ContextUtils
 
 class ConnectivityHelper(
-    val context: Context,
+    private val contextUtils: ContextUtils,
 ) {
-    private var contextUtils: ContextUtils = ContextUtils(context)
-
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     fun isMobileConnected(): Boolean {
         val connectivityManager = contextUtils.getSystemService()
