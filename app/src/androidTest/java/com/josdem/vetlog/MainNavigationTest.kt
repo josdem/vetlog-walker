@@ -50,5 +50,7 @@ class MainNavigationTest {
 
         val secondFragment = onView(withId(R.id.SecondFragment))
         secondFragment.check(matches(isDisplayed()))
+        onView(withId(R.id.message)).check(matches(isDisplayed()))
+        onView(withId(R.id.finish)).perform(click())
     }
 }
