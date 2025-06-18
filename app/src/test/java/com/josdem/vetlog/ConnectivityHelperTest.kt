@@ -11,6 +11,7 @@ import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockkStatic
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -31,6 +32,8 @@ internal class ConnectivityHelperTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
+        mockkStatic(Log::class)
+        every { Log.d(any(), any()) } returns 0
         contextUtils = ContextUtils(context)
         connectivityHelper = ConnectivityHelper(context)
         every { contextUtils.getSystemService() } returns connectivityManager
@@ -39,9 +42,13 @@ internal class ConnectivityHelperTest {
 
     @Test
     fun `should detect mobile network`() {
-        mockkStatic(Log::class)
-        every { Log.d(any(), any()) } returns 0
         every { networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) } returns true
         assertTrue(connectivityHelper.isMobileConnected())
+    }
+
+    @Test
+    fun `should detect wifi network`() {
+        every { networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) } returns false
+        assertFalse(connectivityHelper.isMobileConnected())
     }
 }

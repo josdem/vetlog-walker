@@ -20,7 +20,6 @@ package com.josdem.vetlog.helper
 import android.Manifest
 import android.content.Context
 import android.net.NetworkCapabilities
-import android.util.Log
 import androidx.annotation.RequiresPermission
 import com.josdem.vetlog.util.ContextUtils
 
@@ -35,13 +34,7 @@ class ConnectivityHelper(
         val capabilities =
             connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
         if (capabilities != null) {
-            if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
-                Log.d("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
-                return true
-            } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                Log.d("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
-                return false
-            }
+            return capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
         }
         return false
     }
