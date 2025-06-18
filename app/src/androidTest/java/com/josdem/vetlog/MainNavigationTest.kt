@@ -48,7 +48,7 @@ class MainNavigationTest {
         onView(withId(R.id.petIds)).perform(typeText("338"))
         onView(withId(R.id.send)).perform(click())
 
-        val secondFragment = onView(withId(R.id.SecondFragment))
+        val secondFragment = onView(withId(R.id.secondFragment))
         secondFragment.check(matches(isDisplayed()))
         onView(withId(R.id.message)).check(matches(isDisplayed()))
         onView(withId(R.id.finish)).perform(click())
