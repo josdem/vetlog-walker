@@ -31,6 +31,11 @@ Where:
 ./gradlew test
 ```
 
+### To run instrumented tests
+```bash
+./gradlew connectedAndroidTest
+```
+
 ### To build the project
 ```bash
 ./gradlew assembleDebug
