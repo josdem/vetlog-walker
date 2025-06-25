@@ -19,6 +19,7 @@ package com.josdem.vetlog.service
 
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Path
 
 interface VetlogService {
@@ -29,6 +30,7 @@ interface VetlogService {
 
     @GET("/geolocation/location/{latitude}/{longitude}")
     suspend fun sendLocation(
+        @Header("token") token: String,
         @Path("latitude") latitude: Double,
         @Path("longitude") longitude: Double,
     ): Response<String>

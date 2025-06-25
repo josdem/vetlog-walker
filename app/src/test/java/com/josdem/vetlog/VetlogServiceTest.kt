@@ -31,6 +31,8 @@ class VetlogServiceTest {
     private val vetlogService: VetlogService =
         RetrofitHelper.getInstance().create(VetlogService::class.java)
 
+    private val token = System.getenv("TOKEN")!!
+
     @Test
     fun `a should store a pet for geolocation`() =
         runTest {
@@ -43,7 +45,7 @@ class VetlogServiceTest {
     @Test
     fun `b should send pet geolocation`() =
         runTest {
-            val response = vetlogService.sendLocation(37.7749, -122.4194)
+            val response = vetlogService.sendLocation(token, 37.7749, -122.4194)
             val body: String? = response.body()
             assertTrue(response.isSuccessful)
             assertEquals("OK", body)

@@ -43,6 +43,7 @@ class LocationTracker(
     private lateinit var vetlogService: VetlogService
     private lateinit var contextUtils: ContextUtils
     private lateinit var connectivityHelper: ConnectivityHelper
+    private lateinit var token: String
 
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     override fun onCreate(owner: LifecycleOwner) {
@@ -51,6 +52,7 @@ class LocationTracker(
         vetlogService = RetrofitHelper.getInstance().create(VetlogService::class.java)
         contextUtils = ContextUtils(context)
         connectivityHelper = ConnectivityHelper(contextUtils)
+        token = System.getenv("TOKEN")!!
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
@@ -66,7 +68,7 @@ class LocationTracker(
             return
         }
         MainScope().launch {
-            val result = vetlogService.sendLocation(latitude, longitude)
+            val result = vetlogService.sendLocation(token, latitude, longitude)
             Log.d("response: ", result.body().toString())
         }
     }
