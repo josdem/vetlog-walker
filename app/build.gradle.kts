@@ -73,7 +73,7 @@ tasks.register("setToken") {
         val fileToModify = file("../gradle.properties")
         if (fileToModify.exists()) {
             val originalContent = fileToModify.readText()
-            val modifiedContent = originalContent.replace("userToken", System.getenv("TOKEN"))
+            val modifiedContent = originalContent.replace("userToken", "\"${System.getenv("TOKEN")}\"")
             fileToModify.writeText(modifiedContent)
         } else {
             println("File not found: ${fileToModify.path}")
