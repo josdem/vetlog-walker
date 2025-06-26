@@ -14,6 +14,7 @@ android {
         targetSdk = 35
         versionCode = 10
         versionName = "1.1.0"
+        buildConfigField("String", "TOKEN",  project.findProperty("token") as String)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,6 +37,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 

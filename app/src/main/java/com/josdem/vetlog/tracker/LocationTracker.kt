@@ -27,6 +27,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresPermission
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import com.josdem.vetlog.BuildConfig
 import com.josdem.vetlog.R
 import com.josdem.vetlog.helper.ConnectivityHelper
 import com.josdem.vetlog.service.RetrofitHelper
@@ -52,7 +53,7 @@ class LocationTracker(
         vetlogService = RetrofitHelper.getInstance().create(VetlogService::class.java)
         contextUtils = ContextUtils(context)
         connectivityHelper = ConnectivityHelper(contextUtils)
-        token = System.getenv("TOKEN")!!
+        token = BuildConfig.TOKEN
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
