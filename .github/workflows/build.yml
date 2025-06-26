@@ -17,6 +17,8 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: gradle
+      - name: Setting user token
+        run: bash ./gradlew setToken
       - name: Run Tests
         run: bash ./gradlew test
   apk:

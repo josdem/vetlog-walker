@@ -67,3 +67,16 @@ dependencies {
     androidTestImplementation(libs.androidx.rules)
     androidTestImplementation(libs.androidx.espresso.core)
 }
+
+tasks.register("setToken") {
+    doLast {
+        val fileToModify = file("../gradle.properties")
+        if (fileToModify.exists()) {
+            val originalContent = fileToModify.readText()
+            val modifiedContent = originalContent.replace("userToken", System.getenv("TOKEN"))
+            fileToModify.writeText(modifiedContent)
+        } else {
+            println("File not found: ${fileToModify.path}")
+        }
+    }
+}
