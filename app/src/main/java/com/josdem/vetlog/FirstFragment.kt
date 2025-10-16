@@ -61,7 +61,9 @@ class FirstFragment : Fragment() {
             val pets = petIds.split(",").map { it.trim() }
             ApplicationState.storeValue(PET_IDS, pets)
             MainScope().launch {
-                val result = vetlogService.storePets(petIds)
+                val petsAsLong = pets.map { it.toLong() }
+                petsAsLong.forEach { Log.d("value", it.toString()) }
+                val result = vetlogService.storePets(pets.map { it.toLong() })
                 Log.d("response: ", result.body().toString())
             }
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)

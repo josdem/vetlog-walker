@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object RetrofitHelper {
-    private const val BASE_URL = "https://vetlog.org/"
+    private const val BASE_URL = "https://vetlog-backend.josdem.io/"
 
     fun getInstance(): Retrofit =
         Retrofit
