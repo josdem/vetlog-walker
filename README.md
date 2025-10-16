@@ -40,3 +40,13 @@ Where:
 ```bash
 ./gradlew assembleDebug
 ```
+
+**Notes**
+- Make sure the app has location permission in your emulator device
+- Make sure you has `TOKEN` system properties with a valid value
+
+```bash
+expot TOKEN="userToken"
+```
+
+Previous token should be the same as defined at [Vetlog Yaml configuration file](https://github.com/josdem/vetlog-spring-boot/wiki/YAML-File)
