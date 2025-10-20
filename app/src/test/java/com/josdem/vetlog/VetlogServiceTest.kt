@@ -17,6 +17,7 @@
 
 package com.josdem.vetlog
 
+import com.josdem.vetlog.model.PetDto
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
 import kotlinx.coroutines.test.runTest
@@ -36,7 +37,8 @@ class VetlogServiceTest {
     @Test
     fun `a should store a pet for geolocation`() =
         runTest {
-            val response = vetlogService.storePets("338")
+            val petDto = PetDto(listOf(338))
+            val response = vetlogService.storePets(petDto)
             val body: String? = response.body()
             assertTrue(response.isSuccessful)
             assertEquals("OK", body)

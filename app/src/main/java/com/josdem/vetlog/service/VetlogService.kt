@@ -17,6 +17,7 @@
 
 package com.josdem.vetlog.service
 
+import com.josdem.vetlog.model.PetDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -27,7 +28,7 @@ import retrofit2.http.Path
 interface VetlogService {
     @POST("/geolocation/storePetLocation")
     suspend fun storePets(
-        @Body petsIds: List<Long>,
+        @Body petsIds: PetDto,
     ): Response<String>
 
     @GET("/geolocation/location/{latitude}/{longitude}")
