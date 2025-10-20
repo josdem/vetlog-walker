@@ -21,8 +21,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
-object RetrofitHelper {
-    private const val BASE_URL = "https://vetlog-backend.josdem.io/"
+object LegacyRetrofitHelper {
+    private const val BASE_URL = "https://vetlog.org/"
 
     fun getInstance(): Retrofit =
         Retrofit

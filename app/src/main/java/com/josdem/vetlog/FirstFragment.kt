@@ -25,6 +25,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.josdem.vetlog.databinding.FragmentFirstBinding
+import com.josdem.vetlog.model.PetDto
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
 import com.josdem.vetlog.state.ApplicationState
@@ -61,7 +62,9 @@ class FirstFragment : Fragment() {
             val pets = petIds.split(",").map { it.trim() }
             ApplicationState.storeValue(PET_IDS, pets)
             MainScope().launch {
-                val result = vetlogService.storePets(petIds)
+                val petsAsLong = pets.map { it.toLong() }
+                val petDto = PetDto(petsAsLong)
+                val result = vetlogService.storePets(petDto)
                 Log.d("response: ", result.body().toString())
             }
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
