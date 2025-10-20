@@ -44,7 +44,7 @@ class VetlogServiceTest {
             val response = vetlogService.storePets(petDto)
             val body: String? = response.body()
             assertTrue(response.isSuccessful)
-            assertEquals("OK", body)
+            assertEquals("Created new pets", body)
         }
 
     @Test
