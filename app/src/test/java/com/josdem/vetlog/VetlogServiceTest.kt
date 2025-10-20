@@ -18,6 +18,7 @@
 package com.josdem.vetlog
 
 import com.josdem.vetlog.model.PetDto
+import com.josdem.vetlog.service.LegacyRetrofitHelper
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
 import kotlinx.coroutines.test.runTest
@@ -32,6 +33,8 @@ class VetlogServiceTest {
     private val vetlogService: VetlogService =
         RetrofitHelper.getInstance().create(VetlogService::class.java)
 
+    private val vetlogLegacyService: VetlogService =
+        LegacyRetrofitHelper.getInstance().create(VetlogService::class.java)
     private val token = System.getenv("TOKEN")!!
 
     @Test
@@ -47,7 +50,7 @@ class VetlogServiceTest {
     @Test
     fun `b should send pet geolocation`() =
         runTest {
-            val response = vetlogService.sendLocation(token, 37.7749, -122.4194)
+            val response = vetlogLegacyService.sendLocation(token, 37.7749, -122.4194)
             val body: String? = response.body()
             assertTrue(response.isSuccessful)
             assertEquals("OK", body)
@@ -56,7 +59,7 @@ class VetlogServiceTest {
     @Test
     fun `a should send a pulling up request`() =
         runTest {
-            val response = vetlogService.pullingUp("338")
+            val response = vetlogLegacyService.pullingUp("338")
             val body: String? = response.body()
             assertTrue(response.isSuccessful)
             assertEquals("OK", body)

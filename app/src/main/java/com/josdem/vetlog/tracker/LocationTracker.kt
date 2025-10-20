@@ -30,7 +30,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.josdem.vetlog.BuildConfig
 import com.josdem.vetlog.R
 import com.josdem.vetlog.helper.ConnectivityHelper
-import com.josdem.vetlog.service.RetrofitHelper
+import com.josdem.vetlog.service.LegacyRetrofitHelper
 import com.josdem.vetlog.service.VetlogService
 import com.josdem.vetlog.util.ContextUtils
 import kotlinx.coroutines.MainScope
@@ -50,7 +50,7 @@ class LocationTracker(
     override fun onCreate(owner: LifecycleOwner) {
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0f, this)
-        vetlogService = RetrofitHelper.getInstance().create(VetlogService::class.java)
+        vetlogService = LegacyRetrofitHelper.getInstance().create(VetlogService::class.java)
         contextUtils = ContextUtils(context)
         connectivityHelper = ConnectivityHelper(contextUtils)
         token = BuildConfig.TOKEN
