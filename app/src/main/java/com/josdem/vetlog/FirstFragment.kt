@@ -63,7 +63,6 @@ class FirstFragment : Fragment() {
             ApplicationState.storeValue(PET_IDS, pets)
             MainScope().launch {
                 val petsAsLong = pets.map { it.toLong() }
-                petsAsLong.forEach { Log.d("value", it.toString()) }
                 val petDto = PetDto(petsAsLong)
                 val result = vetlogService.storePets(petDto)
                 Log.d("response: ", result.body().toString())
