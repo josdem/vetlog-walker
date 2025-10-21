@@ -31,7 +31,7 @@ import com.josdem.vetlog.BuildConfig
 import com.josdem.vetlog.R
 import com.josdem.vetlog.helper.ConnectivityHelper
 import com.josdem.vetlog.model.LocationDto
-import com.josdem.vetlog.service.LegacyRetrofitHelper
+import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
 import com.josdem.vetlog.state.ApplicationState
 import com.josdem.vetlog.state.PET_IDS
@@ -45,6 +45,7 @@ class LocationTracker(
     DefaultLifecycleObserver {
     private lateinit var locationManager: LocationManager
     private lateinit var vetlogService: VetlogService
+    private lateinit var vetlogLegacyService: VetlogService
     private lateinit var contextUtils: ContextUtils
     private lateinit var connectivityHelper: ConnectivityHelper
     private lateinit var token: String
@@ -53,7 +54,7 @@ class LocationTracker(
     override fun onCreate(owner: LifecycleOwner) {
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0f, this)
-        vetlogService = LegacyRetrofitHelper.getInstance().create(VetlogService::class.java)
+        vetlogService = RetrofitHelper.getInstance().create(VetlogService::class.java)
         contextUtils = ContextUtils(context)
         connectivityHelper = ConnectivityHelper(contextUtils)
         token = BuildConfig.TOKEN

@@ -17,6 +17,7 @@
 
 package com.josdem.vetlog
 
+import com.josdem.vetlog.model.LocationDto
 import com.josdem.vetlog.model.PetDto
 import com.josdem.vetlog.service.LegacyRetrofitHelper
 import com.josdem.vetlog.service.RetrofitHelper
@@ -50,10 +51,11 @@ class VetlogServiceTest {
     @Test
     fun `b should send pet geolocation`() =
         runTest {
-            val response = vetlogLegacyService.sendLocation(token, 37.7749, -122.4194)
+            val locationDto = LocationDto(37.7749, -122.4194, listOf(338))
+            val response = vetlogService.sendLocation(token, locationDto)
             val body: String? = response.body()
             assertTrue(response.isSuccessful)
-            assertEquals("OK", body)
+            assertEquals("Location stored successfully", body)
         }
 
     @Test
