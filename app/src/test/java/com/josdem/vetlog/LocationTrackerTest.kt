@@ -23,7 +23,6 @@ import android.location.LocationManager
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.josdem.vetlog.helper.ConnectivityHelper
-import com.josdem.vetlog.service.VetlogService
 import com.josdem.vetlog.tracker.LocationTracker
 import com.josdem.vetlog.util.ContextUtils
 import io.mockk.MockKAnnotations
@@ -46,9 +45,6 @@ internal class LocationTrackerTest {
 
     @RelaxedMockK
     private lateinit var locationManager: LocationManager
-
-    @MockK
-    private lateinit var vetlogService: VetlogService
 
     @MockK
     private lateinit var owner: LifecycleOwner
