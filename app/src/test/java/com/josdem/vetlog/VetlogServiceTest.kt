@@ -20,6 +20,7 @@ package com.josdem.vetlog
 import com.josdem.vetlog.model.LocationDto
 import com.josdem.vetlog.model.PetDto
 import com.josdem.vetlog.service.LegacyRetrofitHelper
+import com.josdem.vetlog.service.LegacyVetlogService
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
 import kotlinx.coroutines.test.runTest
@@ -34,8 +35,8 @@ class VetlogServiceTest {
     private val vetlogService: VetlogService =
         RetrofitHelper.getInstance().create(VetlogService::class.java)
 
-    private val vetlogLegacyService: VetlogService =
-        LegacyRetrofitHelper.getInstance().create(VetlogService::class.java)
+    private val vetlogLegacyService: LegacyVetlogService =
+        LegacyRetrofitHelper.getInstance().create(LegacyVetlogService::class.java)
     private val token = System.getenv("TOKEN")!!
 
     @Test
