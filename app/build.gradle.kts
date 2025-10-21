@@ -13,7 +13,7 @@ android {
         minSdk = 23
         targetSdk = 35
         versionCode = 10
-        versionName = "1.1.2"
+        versionName = "1.1.3"
         buildConfigField("String", "TOKEN",  project.findProperty("token") as String)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
