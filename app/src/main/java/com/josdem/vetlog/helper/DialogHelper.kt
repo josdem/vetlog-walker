@@ -21,8 +21,8 @@ import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
 import com.josdem.vetlog.R
+import com.josdem.vetlog.service.LegacyVetlogService
 import com.josdem.vetlog.service.RetrofitHelper
-import com.josdem.vetlog.service.VetlogService
 import com.josdem.vetlog.state.ApplicationState
 import com.josdem.vetlog.state.PET_IDS
 import kotlinx.coroutines.MainScope
@@ -32,7 +32,7 @@ class DialogHelper(
     context: Context,
 ) {
     private val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-    private var vetlogService = RetrofitHelper.getInstance().create(VetlogService::class.java)
+    private var legacyVetlogService = RetrofitHelper.getInstance().create(LegacyVetlogService::class.java)
     private val checkedItems = BooleanArray(ApplicationState.getValue(PET_IDS)!!.size)
     private val selectedItems = ApplicationState.getValue(PET_IDS)!!.toMutableList()
 
@@ -44,7 +44,7 @@ class DialogHelper(
                     for (i in checkedItems.indices) {
                         if (checkedItems[i]) {
                             Log.d("Item: ", selectedItems[i])
-                            val result = vetlogService.pullingUp(selectedItems[i])
+                            val result = legacyVetlogService.pullingUp(selectedItems[i])
                             Log.d("response: ", result.body().toString())
                         }
                     }

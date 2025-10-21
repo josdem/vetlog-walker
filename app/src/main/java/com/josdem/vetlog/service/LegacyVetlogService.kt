@@ -17,28 +17,14 @@
 
 package com.josdem.vetlog.service
 
-import com.josdem.vetlog.model.LocationDto
-import com.josdem.vetlog.model.PetDto
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.GET
+import retrofit2.http.Path
 
-interface VetlogService {
-    @POST("/geolocation/storePetLocation")
-    suspend fun storePets(
-        @Body petsIds: PetDto,
-    ): Response<String>
+interface LegacyVetlogService {
 
-    @POST("/geolocation/storeLocation")
-    suspend fun sendLocation(
-        @Header("token") token: String,
-        @Body location: LocationDto,
-    ): Response<String>
-
-    @DELETE("/geolocation/removeAll")
-    suspend fun removeAll(
-        @Header("token") token: String,
+    @GET("/geolocation/pullup/{petId}")
+    suspend fun pullingUp(
+        @Path("petId") petId: String,
     ): Response<String>
 }

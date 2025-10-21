@@ -20,6 +20,7 @@ package com.josdem.vetlog
 import com.josdem.vetlog.model.LocationDto
 import com.josdem.vetlog.model.PetDto
 import com.josdem.vetlog.service.LegacyRetrofitHelper
+import com.josdem.vetlog.service.LegacyVetlogService
 import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
 import kotlinx.coroutines.test.runTest
@@ -34,8 +35,8 @@ class VetlogServiceTest {
     private val vetlogService: VetlogService =
         RetrofitHelper.getInstance().create(VetlogService::class.java)
 
-    private val vetlogLegacyService: VetlogService =
-        LegacyRetrofitHelper.getInstance().create(VetlogService::class.java)
+    private val vetlogLegacyService: LegacyVetlogService =
+        LegacyRetrofitHelper.getInstance().create(LegacyVetlogService::class.java)
     private val token = System.getenv("TOKEN")!!
 
     @Test
@@ -59,11 +60,20 @@ class VetlogServiceTest {
         }
 
     @Test
-    fun `a should send a pulling up request`() =
+    fun `c should send a pulling up request`() =
         runTest {
             val response = vetlogLegacyService.pullingUp("338")
             val body: String? = response.body()
             assertTrue(response.isSuccessful)
             assertEquals("OK", body)
+        }
+
+    @Test
+    fun `d should remove all pets in memory`() =
+        runTest {
+            val response = vetlogService.removeAll(token)
+            val body: String? = response.body()
+            assertTrue(response.isSuccessful)
+            assertEquals("Deleted all pet's locations", body)
         }
 }

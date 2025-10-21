@@ -18,17 +18,26 @@
 package com.josdem.vetlog
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.josdem.vetlog.databinding.FragmentSecondBinding
 import com.josdem.vetlog.helper.DialogHelper
+import com.josdem.vetlog.model.PetDto
+import com.josdem.vetlog.service.RetrofitHelper
+import com.josdem.vetlog.service.VetlogService
 import com.josdem.vetlog.tracker.LocationTracker
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 
 class SecondFragment : Fragment() {
     private var _binding: FragmentSecondBinding? = null
+    private lateinit var vetlogService: VetlogService
+    private lateinit var token: String
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -39,6 +48,8 @@ class SecondFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        token = BuildConfig.TOKEN
+        vetlogService = RetrofitHelper.getInstance().create(VetlogService::class.java)
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
 
         val dialogHelper = context?.let { DialogHelper(it) }
@@ -59,6 +70,10 @@ class SecondFragment : Fragment() {
         tracker?.let { lifecycle.addObserver(it) }
 
         binding.finish.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val result = vetlogService.removeAll(token)
+                Log.d("response: ", result.body().toString())
+            }
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
             tracker?.let { lifecycle.removeObserver(it) }
             tracker?.onDestroy(this)
