@@ -45,7 +45,6 @@ class LocationTracker(
     DefaultLifecycleObserver {
     private lateinit var locationManager: LocationManager
     private lateinit var vetlogService: VetlogService
-    private lateinit var vetlogLegacyService: VetlogService
     private lateinit var contextUtils: ContextUtils
     private lateinit var connectivityHelper: ConnectivityHelper
     private lateinit var token: String
