@@ -60,11 +60,20 @@ class VetlogServiceTest {
         }
 
     @Test
-    fun `a should send a pulling up request`() =
+    fun `c should send a pulling up request`() =
         runTest {
             val response = vetlogLegacyService.pullingUp("338")
             val body: String? = response.body()
             assertTrue(response.isSuccessful)
             assertEquals("OK", body)
+        }
+
+    @Test
+    fun `d should remove all pets in memory`() =
+        runTest {
+            val response = vetlogService.removeAll(token)
+            val body: String? = response.body()
+            assertTrue(response.isSuccessful)
+            assertEquals("Deleted all pet's locations", body)
         }
 }

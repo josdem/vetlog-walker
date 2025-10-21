@@ -17,13 +17,8 @@
 
 package com.josdem.vetlog.service
 
-import com.josdem.vetlog.model.LocationDto
-import com.josdem.vetlog.model.PetDto
 import retrofit2.Response
-import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface LegacyVetlogService {
