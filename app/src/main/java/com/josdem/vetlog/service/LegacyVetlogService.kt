@@ -22,7 +22,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface LegacyVetlogService {
-
     @GET("/geolocation/pullup/{petId}")
     suspend fun pullingUp(
         @Path("petId") petId: String,
