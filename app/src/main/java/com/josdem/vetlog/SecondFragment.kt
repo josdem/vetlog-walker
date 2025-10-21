@@ -23,6 +23,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.josdem.vetlog.databinding.FragmentSecondBinding
 import com.josdem.vetlog.helper.DialogHelper
@@ -69,7 +70,7 @@ class SecondFragment : Fragment() {
         tracker?.let { lifecycle.addObserver(it) }
 
         binding.finish.setOnClickListener {
-            MainScope().launch {
+            viewLifecycleOwner.lifecycleScope.launch {
                 val result = vetlogService.removeAll(token)
                 Log.d("response: ", result.body().toString())
             }
