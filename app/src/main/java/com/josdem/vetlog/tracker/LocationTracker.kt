@@ -30,8 +30,11 @@ import androidx.lifecycle.LifecycleOwner
 import com.josdem.vetlog.BuildConfig
 import com.josdem.vetlog.R
 import com.josdem.vetlog.helper.ConnectivityHelper
-import com.josdem.vetlog.service.LegacyRetrofitHelper
+import com.josdem.vetlog.model.LocationDto
+import com.josdem.vetlog.service.RetrofitHelper
 import com.josdem.vetlog.service.VetlogService
+import com.josdem.vetlog.state.ApplicationState
+import com.josdem.vetlog.state.PET_IDS
 import com.josdem.vetlog.util.ContextUtils
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -50,7 +53,7 @@ class LocationTracker(
     override fun onCreate(owner: LifecycleOwner) {
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0f, this)
-        vetlogService = LegacyRetrofitHelper.getInstance().create(VetlogService::class.java)
+        vetlogService = RetrofitHelper.getInstance().create(VetlogService::class.java)
         contextUtils = ContextUtils(context)
         connectivityHelper = ConnectivityHelper(contextUtils)
         token = BuildConfig.TOKEN
@@ -69,7 +72,10 @@ class LocationTracker(
             return
         }
         MainScope().launch {
-            val result = vetlogService.sendLocation(token, latitude, longitude)
+            val pets = ApplicationState.getValue(PET_IDS)
+            val petsAsLong = pets!!.map { it.toLong() }
+            val locationDto = LocationDto(latitude, longitude, petsAsLong)
+            val result = vetlogService.sendLocation(token, locationDto)
             Log.d("response: ", result.body().toString())
         }
     }

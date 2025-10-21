@@ -18,10 +18,14 @@
 package com.josdem.vetlog.model
 
 /**
- * Data transfer object representing a collection of pet IDs.
- * @property petsIds List of unique identifiers for pets. Used to transfer pet references in API requests and responses.
+ * Data transfer object representing pet's geolocation.
+ * @property latitude Pet's latitude geolocation
+ * @property longitude Pet's longitude geolocation
+ * @property petIds List of unique identifiers for pets. Used to transfer pet references in API requests and responses.
  */
 
-data class PetDto(
-    val petsIds: List<Long>,
+data class LocationDto(
+    val latitude: Double,
+    val longitude: Double,
+    val petIds: List<Long>,
 )
